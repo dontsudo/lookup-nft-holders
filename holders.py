@@ -17,6 +17,13 @@ session.headers.update(
 
 
 def get_nft_holders_by_address(address):
+    """Get holders by nft address.
+
+    Args:
+        address (str): The nft address
+    Returns:
+        holders (str[]): The holders of specific nft.
+    """
     url = HOLDERS_URL.format(address=address)
     holders = []
     page = 1
@@ -34,10 +41,15 @@ def get_nft_holders_by_address(address):
 
 
 def main(args):
+    """Drive function
+
+    Args:
+        args (address, output): args by argparse
+    """
     holders = get_nft_holders_by_address(args.address)
 
-    with open("holders.json", "w") as f:
-        json.dumps(holders, f)
+    with open(args.output, "w") as f:
+        json.dump(holders, f)
 
 
 if __name__ == "__main__":
@@ -45,8 +57,10 @@ if __name__ == "__main__":
     parser.add_argument(
         # default = doge sound club
         "--address",
+        "-a",
         default="0xe47e90c58f8336a2f24bcd9bcb530e2e02e1e8ae",
     )
+    parser.add_argument("--output", "-o", default="holders.json")
     args = parser.parse_args()
 
     main(args)
