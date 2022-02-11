@@ -2,5 +2,5 @@
 
 ```bash
 # THIS MAKES `holders.json` file..
-$ python ./holders.py --address {nft-address}
+$ python ./holders.py --address {nft-address} --output {output-file}
 ```
